@@ -1,0 +1,133 @@
+"use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const vitest_1 = require("vitest");
+const query_result_set_builder_1 = require("../integrations/query-integration/query-result-set-builder");
+const types_1 = require("../types");
+function getQueryResultSetBuilder(status) {
+    return {
+        queryResultJson: {
+            queryId: "test",
+            status,
+            results: [
+                [1, "0x-tx-id-0", "0xfrom-address-0", true, 0.5],
+                [2, "0x-tx-id-1", "0xfrom-address-1", false, 0.75],
+                [3, "0x-tx-id-2", "0xfrom-address-2", false, 1.75],
+                [4, "0x-tx-id-3", "0xfrom-address-3", true, 100.001],
+            ],
+            startedAt: "2022-05-19T00:00:00Z",
+            endedAt: "2022-05-19T00:01:30Z",
+            columnLabels: [
+                "block_id",
+                "tx_id",
+                "from_address",
+                "succeeded",
+                "amount",
+            ],
+            columnTypes: ["number", "string", "string", "boolean", "number"],
+            message: "",
+            errors: null,
+            pageSize: 100,
+            pageNumber: 0,
+        },
+        error: null,
+    };
+}
+(0, vitest_1.describe)("runStats", () => {
+    const queryResultSet = new query_result_set_builder_1.QueryResultSetBuilder(getQueryResultSetBuilder(types_1.QueryStatusFinished));
+    (0, vitest_1.it)("runStats startedAt is Date type", () => __awaiter(void 0, void 0, void 0, function* () {
+        var _a;
+        vitest_1.assert.typeOf((_a = queryResultSet.runStats) === null || _a === void 0 ? void 0 : _a.startedAt, "Date");
+    }));
+    (0, vitest_1.it)("runStats endedAt is Date type", () => __awaiter(void 0, void 0, void 0, function* () {
+        var _b;
+        vitest_1.assert.typeOf((_b = queryResultSet.runStats) === null || _b === void 0 ? void 0 : _b.startedAt, "Date");
+    }));
+    (0, vitest_1.it)("runStats recordCount = 4", () => __awaiter(void 0, void 0, void 0, function* () {
+        var _c;
+        vitest_1.assert.equal((_c = queryResultSet.runStats) === null || _c === void 0 ? void 0 : _c.recordCount, 4);
+    }));
+    (0, vitest_1.it)("runStats elpasedSeconds = 90", () => __awaiter(void 0, void 0, void 0, function* () {
+        var _d;
+        vitest_1.assert.equal((_d = queryResultSet.runStats) === null || _d === void 0 ? void 0 : _d.elapsedSeconds, 90);
+    }));
+});
+(0, vitest_1.describe)("records", () => {
+    const queryResultSet = new query_result_set_builder_1.QueryResultSetBuilder(getQueryResultSetBuilder(types_1.QueryStatusFinished));
+    (0, vitest_1.it)("records length = rows length", () => __awaiter(void 0, void 0, void 0, function* () {
+        var _a, _b;
+        vitest_1.assert.equal((_a = queryResultSet.records) === null || _a === void 0 ? void 0 : _a.length, (_b = queryResultSet.rows) === null || _b === void 0 ? void 0 : _b.length);
+    }));
+    (0, vitest_1.it)("columns length = records keys length", () => {
+        var _a;
+        (_a = queryResultSet.records) === null || _a === void 0 ? void 0 : _a.map((record) => {
+            var _a;
+            let recordKeys = Object.keys(record);
+            vitest_1.assert.equal(recordKeys.length, (_a = queryResultSet.columns) === null || _a === void 0 ? void 0 : _a.length);
+        });
+    });
+    (0, vitest_1.it)("columns = record keys", () => {
+        var _a, _b;
+        let globalRecordKeysSet = new Set();
+        (_a = queryResultSet.records) === null || _a === void 0 ? void 0 : _a.map((record) => {
+            let recordKeys = Object.keys(record);
+            Object.keys(record).forEach((k) => globalRecordKeysSet.add(k));
+        });
+        let globalRecordKeys = [...globalRecordKeysSet];
+        (_b = queryResultSet.columns) === null || _b === void 0 ? void 0 : _b.forEach((c) => {
+            vitest_1.assert.notEqual(globalRecordKeys.indexOf(c), -1);
+        });
+    });
+    (0, vitest_1.it)("record values match row values", () => {
+        var _a;
+        let records = queryResultSet === null || queryResultSet === void 0 ? void 0 : queryResultSet.records;
+        (_a = queryResultSet === null || queryResultSet === void 0 ? void 0 : queryResultSet.rows) === null || _a === void 0 ? void 0 : _a.forEach((cells, rowIndex) => {
+            cells.forEach((cellValue, colIndex) => {
+                let columns = queryResultSet === null || queryResultSet === void 0 ? void 0 : queryResultSet.columns;
+                if (!columns) {
+                    throw new Error("QueryResultSetBuilder columns cannot be null for tests");
+                }
+                let column = columns[colIndex];
+                if (records === null) {
+                    throw new Error("QueryResultSetBuilder records cannot be null for tests");
+                }
+                let record = records[rowIndex];
+                let recordValue = record[column];
+                vitest_1.assert.equal(cellValue, recordValue);
+            });
+        });
+    });
+});
+(0, vitest_1.describe)("status", () => {
+    (0, vitest_1.it)("isFinished", () => __awaiter(void 0, void 0, void 0, function* () {
+        const queryResultSet = new query_result_set_builder_1.QueryResultSetBuilder(getQueryResultSetBuilder(types_1.QueryStatusFinished));
+        vitest_1.assert.equal(queryResultSet === null || queryResultSet === void 0 ? void 0 : queryResultSet.status, types_1.QueryStatusFinished);
+    }));
+    (0, vitest_1.it)("isPending", () => __awaiter(void 0, void 0, void 0, function* () {
+        const queryResultSet = new query_result_set_builder_1.QueryResultSetBuilder(getQueryResultSetBuilder(types_1.QueryStatusPending));
+        vitest_1.assert.equal(queryResultSet === null || queryResultSet === void 0 ? void 0 : queryResultSet.status, types_1.QueryStatusPending);
+    }));
+    (0, vitest_1.it)("isError", () => __awaiter(void 0, void 0, void 0, function* () {
+        const queryResultSet = new query_result_set_builder_1.QueryResultSetBuilder(getQueryResultSetBuilder(types_1.QueryStatusError));
+        vitest_1.assert.equal(queryResultSet === null || queryResultSet === void 0 ? void 0 : queryResultSet.status, types_1.QueryStatusError);
+    }));
+});
+(0, vitest_1.describe)("queryID", () => {
+    (0, vitest_1.it)("queryId is set", () => __awaiter(void 0, void 0, void 0, function* () {
+        const queryResultSet = new query_result_set_builder_1.QueryResultSetBuilder(getQueryResultSetBuilder(types_1.QueryStatusFinished));
+        vitest_1.assert.notEqual(queryResultSet === null || queryResultSet === void 0 ? void 0 : queryResultSet.queryId, null);
+    }));
+    (0, vitest_1.it)("queryId is test", () => __awaiter(void 0, void 0, void 0, function* () {
+        const queryResultSet = new query_result_set_builder_1.QueryResultSetBuilder(getQueryResultSetBuilder(types_1.QueryStatusFinished));
+        vitest_1.assert.equal(queryResultSet === null || queryResultSet === void 0 ? void 0 : queryResultSet.queryId, "test");
+    }));
+});
+//# sourceMappingURL=query-result-set-builder.test.js.map

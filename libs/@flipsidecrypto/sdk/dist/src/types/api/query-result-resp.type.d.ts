@@ -1,0 +1,20 @@
+import { QueryStatus } from "../query-status.type";
+import { ApiResponse } from "./api-response.type";
+export declare type Row = (string | number | boolean | null)[];
+export declare type QueryResultJson = {
+    queryId: string;
+    status: QueryStatus;
+    results: Row[];
+    startedAt: string;
+    endedAt: string;
+    columnLabels: string[];
+    columnTypes: string[];
+    message?: string;
+    errors?: string | null;
+    pageNumber: number;
+    pageSize: number;
+};
+export interface QueryResultResp extends ApiResponse {
+    data: QueryResultJson | null;
+}
+//# sourceMappingURL=query-result-resp.type.d.ts.map

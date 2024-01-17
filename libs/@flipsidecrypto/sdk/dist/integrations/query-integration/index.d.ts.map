@@ -1,0 +1,1 @@
+{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../../src/integrations/query-integration/index.ts"],"names":[],"mappings":"AAAA,OAAO,EACL,KAAK,EACL,aAAa,EAKb,SAAS,EACT,cAAc,EACf,MAAM,aAAa,CAAC;AAyBrB,qBAAa,gBAAgB;;gBAIf,GAAG,EAAE,SAAS,EAAE,QAAQ,GAAE,aAAwB;IASxD,GAAG,CAAC,KAAK,EAAE,KAAK,GAAG,OAAO,CAAC,cAAc,CAAC;CAmJjD"}

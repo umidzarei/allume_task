@@ -1,0 +1,36 @@
+{
+  "name": "@flipsidecrypto/sdk",
+  "version": "1.1.1",
+  "description": "The official Flipside Crypto SDK",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flipsidecrypto/sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/flipsidecrypto/sdk/issues"
+  },
+  "homepage": "https://github.com/flipsidecrypto/sdk/js/README.md",
+  "scripts": {
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage --no-watch",
+    "test:run": "vitest run",
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "devDependencies": {
+    "@vitest/ui": "latest",
+    "c8": "^7.11.3",
+    "vite": "^2.9.5",
+    "vitest": "latest"
+  },
+  "keywords": [],
+  "author": "dev@flipsidecrypto.com",
+  "license": "MIT",
+  "dependencies": {
+    "@types/eslint": "^8.4.8",
+    "axios": "^0.27.2"
+  }
+}

@@ -1,0 +1,1 @@
+{"version":3,"file":"api-mocks.d.ts","sourceRoot":"","sources":["../../../../src/tests/mocks/api-mocks.ts"],"names":[],"mappings":"AAAA,OAAO,EACL,SAAS,EACT,eAAe,EAEf,eAAe,EAChB,MAAM,aAAa,CAAC;AAErB,oBAAY,kBAAkB,GAAG;IAC/B,eAAe,EAAE,eAAe,CAAC;IACjC,kBAAkB,EAAE,eAAe,CAAC;CACrC,CAAC;AAEF,wBAAgB,gBAAgB,CAAC,KAAK,EAAE,kBAAkB,GAAG,SAAS,CA6BrE"}

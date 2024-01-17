@@ -1,0 +1,1 @@
+{"version":3,"file":"flipside.d.ts","sourceRoot":"","sources":["../../src/flipside.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,gBAAgB,EAAE,MAAM,gBAAgB,CAAC;AAQlD,qBAAa,QAAQ;IACnB,KAAK,EAAE,gBAAgB,CAAC;gBAEZ,MAAM,EAAE,MAAM,EAAE,UAAU,GAAE,MAAqB;CAO9D;AAED,cAAc,SAAS,CAAC;AACxB,cAAc,UAAU,CAAC;AACzB,OAAO,EAAE,cAAc,EAAE,MAAM,SAAS,CAAC;AACzC,OAAO,EAAE,cAAc,EAAE,CAAC"}

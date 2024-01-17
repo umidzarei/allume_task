@@ -1,0 +1,30 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.QueryRunExecutionError = exports.QueryRunTimeoutError = exports.QueryRunRateLimitError = void 0;
+const base_error_1 = require("./base-error");
+const error_types_1 = require("./error-types");
+class QueryRunRateLimitError extends base_error_1.BaseError {
+    constructor() {
+        const errorType = error_types_1.ERROR_TYPES.query_run_rate_limit_error;
+        super(`${errorType}: you have exceeded the rate limit for creating/running new queries.`);
+        this.errorType = errorType;
+    }
+}
+exports.QueryRunRateLimitError = QueryRunRateLimitError;
+class QueryRunTimeoutError extends base_error_1.BaseError {
+    constructor(timeoutMinutes) {
+        const errorType = error_types_1.ERROR_TYPES.query_run_timeout_error;
+        super(`${errorType}: your query has timed out after ${timeoutMinutes} minutes.`);
+        this.errorType = errorType;
+    }
+}
+exports.QueryRunTimeoutError = QueryRunTimeoutError;
+class QueryRunExecutionError extends base_error_1.BaseError {
+    constructor() {
+        const errorType = error_types_1.ERROR_TYPES.query_run_execution_error;
+        super(`${errorType}: an error has occured while executing your query`);
+        this.errorType = errorType;
+    }
+}
+exports.QueryRunExecutionError = QueryRunExecutionError;
+//# sourceMappingURL=query-run-errors.js.map

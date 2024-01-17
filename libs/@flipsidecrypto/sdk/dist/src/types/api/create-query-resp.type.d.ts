@@ -1,0 +1,9 @@
+import { ApiResponse } from "./api-response.type";
+export declare type CreateQueryJson = {
+    token: string;
+    errors?: string | null;
+};
+export interface CreateQueryResp extends ApiResponse {
+    data: CreateQueryJson | null;
+}
+//# sourceMappingURL=create-query-resp.type.d.ts.map

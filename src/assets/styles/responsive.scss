@@ -1,0 +1,592 @@
+// variables
+$breakPoints: (
+  "sm": 576,
+  "md": 768,
+  "lg": 992,
+  "xl": 1200,
+  "xxl": 1900,
+);
+$br: ("sm", "md", "lg", "xl", "xxl");
+$containers-size: 20px 200px 350px 100px 400px;
+$heading-step: 0.05;
+$sidebar-breakpoint: 1200px;
+
+// Extra small devices (portrait phones, less than 576px)
+// No media query for `xs` since this is the default in Bootstrap
+
+@for $c from 1 through 12 {
+  .col-#{$c} {
+    flex: 0 0 percentage($c/ 12);
+    max-width: percentage($c/ 12);
+    width: 100%;
+    padding: 12px;
+  }
+}
+.d-none {
+  display: none !important;
+}
+
+.flex-wrap {
+  flex-wrap: wrap !important;
+}
+@for $i from 0 through 16 {
+  .mt-#{$i} {
+    margin-top: #{$i * 4}px !important;
+  }
+
+  .mb-#{$i} {
+    margin-bottom: #{$i * 4}px !important;
+  }
+
+  .mr-#{$i} {
+    margin-right: #{$i * 4}px !important;
+  }
+
+  .ml-#{$i} {
+    margin-left: #{$i * 4}px !important;
+  }
+
+  .pt-#{$i} {
+    padding-top: #{$i * 4}px !important;
+  }
+
+  .pb-#{$i} {
+    padding-bottom: #{$i * 4}px !important;
+  }
+
+  .pr-#{$i} {
+    padding-right: #{$i * 4}px !important;
+  }
+
+  .pl-#{$i} {
+    padding-left: #{$i * 4}px !important;
+  }
+
+  .px-#{$i} {
+    padding-left: #{$i * 4}px !important;
+    padding-right: #{$i * 4}px !important;
+  }
+
+  .py-#{$i} {
+    padding-top: #{$i * 4}px !important;
+    padding-bottom: #{$i * 4}px !important;
+  }
+
+  .mx-#{$i} {
+    margin-left: #{$i * 4}px !important;
+    margin-right: #{$i * 4}px !important;
+  }
+
+  .my-#{$i} {
+    margin-top: #{$i * 4}px !important;
+    margin-bottom: #{$i * 4}px !important;
+  }
+}
+
+.p-0 {
+  padding: 0 !important;
+}
+
+h1,
+.h1 {
+  font-size: 1.3rem !important;
+}
+
+h2,
+.h2 {
+  font-size: 1.1rem !important;
+}
+
+h3,
+.h3 {
+  font-size: 1rem !important;
+}
+
+h4,
+.h4 {
+  font-size: 0.95rem !important;
+}
+
+h5,
+.h5 {
+  font-size: 0.92rem !important;
+}
+
+h6,
+.h6 {
+  font-size: 0.9rem !important;
+}
+
+.d-done {
+  display: none !important;
+}
+
+.d-inline-block {
+  display: inline-block !important;
+}
+
+.d-block {
+  display: block !important;
+}
+
+.d-flex {
+  display: flex !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.w-100 {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  flex: 1 1 auto;
+  margin: -12px;
+}
+
+.container {
+  width: 100%;
+  max-width: calc(100% - 30px);
+  padding: 12px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+// $breakPointIndex : length($list: $breakPoints);
+
+@each $name, $size in $breakPoints {
+  @media screen and (min-width : #{$size}px) {
+    .p-#{$name}-0 {
+      padding: 0 !important;
+    }
+
+    @for $i from 0 through 16 {
+      .px-#{$name}-#{$i} {
+        padding-right: #{$i * 4}px !important;
+        padding-left: #{$i * 4}px !important;
+      }
+
+      .py-#{$name}-#{$i} {
+        padding-top: #{$i * 4}px !important;
+        padding-bottom: #{$i * 4}px !important;
+      }
+
+      .mx-#{$name}-#{$i} {
+        margin-right: #{$i * 4}px !important;
+        margin-left: #{$i * 4}px !important;
+      }
+
+      .my-#{$name}-#{$i} {
+        margin-top: #{$i * 4}px !important;
+        margin-bottom: #{$i * 4}px !important;
+      }
+
+      .mt-#{$name}-#{$i} {
+        margin-top: #{$i * 4}px !important;
+      }
+
+      .mb-#{$name}-#{$i} {
+        margin-bottom: #{$i * 4}px !important;
+      }
+
+      .mr-#{$name}-#{$i} {
+        margin-right: #{$i * 4}px !important;
+      }
+
+      .ml-#{$name}-#{$i} {
+        margin-left: #{$i * 4}px !important;
+      }
+
+      .pt-#{$name}-#{$i} {
+        padding-top: #{$i * 4}px !important;
+      }
+
+      .pb-#{$name}-#{$i} {
+        padding-bottom: #{$i * 4}px !important;
+      }
+
+      .pr-#{$name}-#{$i} {
+        padding-right: #{$i * 4}px !important;
+      }
+
+      .pl-#{$name}-#{$i} {
+        padding-left: #{$i * 4}px !important;
+      }
+    }
+
+    $breakPointIndex: index(
+      $list: $br,
+      $value: $name,
+    );
+    $sidebarIndex: index(
+      $list: $br,
+      $value: $sidebar-breakpoint,
+    );
+
+    h1,
+    .h1 {
+      font-size: #{1.9 + $breakPointIndex * $heading-step}rem !important;
+    }
+
+    h2,
+    .h2 {
+      font-size: #{1.05 + $breakPointIndex * $heading-step}rem !important;
+    }
+
+    h3,
+    .h3 {
+      font-size: #{0.9 + $breakPointIndex * $heading-step}rem !important;
+    }
+
+    h4,
+    .h4 {
+      font-size: #{0.85 + $breakPointIndex * $heading-step}rem !important;
+    }
+
+    h5,
+    .h5 {
+      font-size: #{0.8 + $breakPointIndex * $heading-step}rem !important;
+    }
+
+    h6,
+    .h6 {
+      font-size: #{0.75 + $breakPointIndex * $heading-step}rem !important;
+    }
+
+    .d-#{$name}-done {
+      display: none !important;
+    }
+
+    .d-#{$name}-inline-blocck {
+      display: inline-block !important;
+    }
+
+    .d-#{$name}-block {
+      display: block !important;
+    }
+
+    .d-#{$name}-flex {
+      display: flex !important;
+    }
+
+    .container {
+      max-width: #{$size - nth($containers-size, $breakPointIndex)};
+    }
+
+    .vs-navbar {
+      max-width: #{$size - nth($containers-size, $breakPointIndex)};
+      margin: 0 auto !important;
+      padding: 0 !important;
+    }
+
+    // $container-step : #{$container-step + 10};
+
+    @for $c from 1 through 12 {
+      .col-#{$name}-#{$c} {
+        flex: 0 0 percentage($c/ 12);
+        max-width: percentage($c/ 12);
+        width: 100%;
+        padding: 12px;
+      }
+    }
+  }
+}
+
+.overlay {
+  display: none;
+}
+
+@media screen and (max-width: $sidebar-breakpoint) {
+  .vs-navbar-content {
+    width: 100% !important;
+    right: 0 !important;
+    left: 0 !important;
+  }
+
+  #page-wrapper {
+    .vs-sidebar-conten {
+      width: 250px !important;
+    }
+  }
+
+  #page-wrapper.page-collapsed {
+    .vs-sidebar-content {
+      -webkit-transform: translate(-110%) !important;
+      transform: translate(-110%) !important;
+    }
+  }
+
+  #page-wrapper:not(.page-collapsed) {
+    .vs-sidebar-content {
+      -webkit-transform: translate(0) !important;
+      transform: translate(0) !important;
+
+      // background-color: blue !important
+    }
+
+    .overlay {
+      background: rgba(0, 0, 0, 0.2);
+      position: fixed;
+      left: 0px;
+      top: 0px;
+      z-index: 999;
+      width: 100%;
+      height: 100%;
+      max-height: 100vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding-top: 80px;
+      padding-bottom: 80px;
+      display: block;
+    }
+  }
+
+  main {
+    margin-left: 0 !important;
+  }
+}
+
+// Small devices (landscape phones, 576px and up)
+// @media (min-width: 576px) {
+//     @for $i from 0 through 16 {
+//         .mt-sm-#{$i} {
+//             margin-top: #{$i * 4}px !important;
+//         }
+
+//         .mb-sm-#{$i} {
+//             margin-bottom: #{$i * 4}px !important;
+//         }
+
+//         .mr-sm-#{$i} {
+//             margin-right: #{$i * 4}px !important;
+//         }
+
+//         .ml-sm-#{$i} {
+//             margin-left: #{$i * 4}px !important;
+//         }
+
+//         .pt-sm-#{$i} {
+//             padding-top: #{$i * 4}px !important;
+//         }
+
+//         .pb-sm-#{$i} {
+//             padding-bottom: #{$i * 4}px !important;
+//         }
+
+//         .pr-sm-#{$i} {
+//             padding-right: #{$i * 4}px !important;
+//         }
+
+//         .pl-sm-#{$i} {
+//             padding-left: #{$i * 4}px !important;
+//         }
+//     }
+
+//     h1 {
+//         font-size: 1.65rem !important;
+//     }
+
+//     h2 {
+//         font-size: 1.45rem !important;
+//     }
+// }
+
+// Medium devices (tablets, 768px and up)
+// @media (min-width: 768px) {
+//     @for $i from 0 through 16 {
+//         .mt-md-#{$i} {
+//             margin-top: #{$i * 4}px !important;
+//         }
+
+//         .mt-md-#{$i} {
+//             margin-top: #{$i * 4}px !important;
+//         }
+
+//         .mb-md-#{$i} {
+//             margin-bottom: #{$i * 4}px !important;
+//         }
+
+//         .mr-md-#{$i} {
+//             margin-right: #{$i * 4}px !important;
+//         }
+
+//         .ml-md-#{$i} {
+//             margin-left: #{$i * 4}px !important;
+//         }
+
+//         .pt-md-#{$i} {
+//             padding-top: #{$i * 4}px !important;
+//         }
+
+//         .pb-md-#{$i} {
+//             padding-bottom: #{$i * 4}px !important;
+//         }
+
+//         .pr-md-#{$i} {
+//             padding-right: #{$i * 4}px !important;
+//         }
+
+//         .pl-md-#{$i} {
+//             padding-left: #{$i * 4}px !important;
+//         }
+//     }
+
+//     h1 {
+//         font-size: 1.75rem !important;
+//     }
+
+//     h2 {
+//         font-size: 1.55rem !important;
+//     }
+// }
+
+// // Large devices (desktops, 992px and up)
+// @media (min-width: 992px) {
+//     @for $i from 0 through 16 {
+//         .mt-lg-#{$i} {
+//             margin-top: #{$i * 4}px !important;
+//         }
+
+//         .mt-lg-#{$i} {
+//             margin-top: #{$i * 4}px !important;
+//         }
+
+//         .mb-lg-#{$i} {
+//             margin-bottom: #{$i * 4}px !important;
+//         }
+
+//         .mr-lg-#{$i} {
+//             margin-right: #{$i * 4}px !important;
+//         }
+
+//         .ml-lg-#{$i} {
+//             margin-left: #{$i * 4}px !important;
+//         }
+
+//         .pt-lg-#{$i} {
+//             padding-top: #{$i * 4}px !important;
+//         }
+
+//         .pb-lg-#{$i} {
+//             padding-bottom: #{$i * 4}px !important;
+//         }
+
+//         .pr-lg-#{$i} {
+//             padding-right: #{$i * 4}px !important;
+//         }
+
+//         .pl-lg-#{$i} {
+//             padding-left: #{$i * 4}px !important;
+//         }
+//     }
+
+//     h1 {
+//         font-size: 1.85rem !important;
+//     }
+
+//     h2 {
+//         font-size: 1.65rem !important;
+//     }
+// }
+
+// // Extra large devices (large desktops, 1200px and up)
+// @media (min-width: 1200px) {
+//     @for $i from 0 through 16 {
+//         .mt-xl-#{$i} {
+//             margin-top: #{$i * 4}px !important;
+//         }
+
+//         .mt-xl-#{$i} {
+//             margin-top: #{$i * 4}px !important;
+//         }
+
+//         .mb-xl-#{$i} {
+//             margin-bottom: #{$i * 4}px !important;
+//         }
+
+//         .mr-xl-#{$i} {
+//             margin-right: #{$i * 4}px !important;
+//         }
+
+//         .ml-xl-#{$i} {
+//             margin-left: #{$i * 4}px !important;
+//         }
+
+//         .pt-xl-#{$i} {
+//             padding-top: #{$i * 4}px !important;
+//         }
+
+//         .pb-xl-#{$i} {
+//             padding-bottom: #{$i * 4}px !important;
+//         }
+
+//         .pr-xl-#{$i} {
+//             padding-right: #{$i * 4}px !important;
+//         }
+
+//         .pl-xl-#{$i} {
+//             padding-left: #{$i * 4}px !important;
+//         }
+//     }
+
+//     h1 {
+//         font-size: 2rem !important;
+//     }
+
+//     h2 {
+//         font-size: 1.7rem !important;
+//     }
+// }
+
+// @media (min-width : 1900px) {
+//     @for $i from 0 through 16 {
+//         .mt-xxl-#{$i} {
+//             margin-top: #{$i * 4}px !important;
+//         }
+
+//         .mt-xxl-#{$i} {
+//             margin-top: #{$i * 4}px !important;
+//         }
+
+//         .mb-xxl-#{$i} {
+//             margin-bottom: #{$i * 4}px !important;
+//         }
+
+//         .mr-xxl-#{$i} {
+//             margin-right: #{$i * 4}px !important;
+//         }
+
+//         .ml-xxl-#{$i} {
+//             margin-left: #{$i * 4}px !important;
+//         }
+
+//         .pt-xxl-#{$i} {
+//             padding-top: #{$i * 4}px !important;
+//         }
+
+//         .pb-xxl-#{$i} {
+//             padding-bottom: #{$i * 4}px !important;
+//         }
+
+//         .pr-xxl-#{$i} {
+//             padding-right: #{$i * 4}px !important;
+//         }
+
+//         .pl-xxl-#{$i} {
+//             padding-left: #{$i * 4}px !important;
+//         }
+//     }
+
+//     h1 {
+//         font-size: 2.2rem !important;
+//     }
+
+//     h2 {
+//         font-size: 1.9rem !important;
+//     }
+// }

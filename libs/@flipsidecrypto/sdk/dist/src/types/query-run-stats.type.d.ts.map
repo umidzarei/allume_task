@@ -1,0 +1,1 @@
+{"version":3,"file":"query-run-stats.type.d.ts","sourceRoot":"","sources":["../../../src/types/query-run-stats.type.ts"],"names":[],"mappings":"AAAA,oBAAY,aAAa,GAAG;IAC1B,SAAS,EAAE,IAAI,CAAC;IAChB,OAAO,EAAE,IAAI,CAAC;IACd,cAAc,EAAE,MAAM,CAAC;IACvB,WAAW,EAAE,MAAM,CAAC;CACrB,CAAC"}
