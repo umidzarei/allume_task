@@ -3,7 +3,6 @@ import App from './App.vue'
 import Vuesax from 'vuesax';
 import 'vuesax/dist/vuesax.css';
 import router from './routes';
-import { store } from "./store/Store"
 
 Vue.config.productionTip = false
 
@@ -36,22 +35,11 @@ Vue.use(VueAxios, axiosInstance);
 
 
 
-// mixins 
-import { flipSide } from "./mixins/flipside";
-Vue.mixin(flipSide);
-
-
-// filters
-import { formatNumber } from "./filter/formatNumber";
-import { formatDate } from "./filter/formatDate";
-Vue.filter("formatNumber", formatNumber);
-Vue.filter("formatDate", formatDate);
 
 import Layout from "@/components/layout.vue";
 Vue.component("Layout", Layout);
 
 new Vue({
-  store,
   router,
   render: h => h(App),
 }).$mount('#app')

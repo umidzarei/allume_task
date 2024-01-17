@@ -41,8 +41,6 @@
             >
               <template #icon>
                 <i class="aside-inner" :class="innerItem.icon"></i>
-                <!-- <i class='isax isax-chart-21'></i> -->
-                <!-- <i class='isax isax-lamp-on'></i> -->
               </template>
               <span class="smaller">{{ innerItem.text }}</span>
             </vs-sidebar-item>
